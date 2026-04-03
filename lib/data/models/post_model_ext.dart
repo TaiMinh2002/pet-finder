@@ -1,0 +1,51 @@
+// Extension to add copyWith support to PostModel (used by repository)
+import 'post_model.dart';
+
+extension PostModelX on PostModel {
+  PostModel copyWith({
+    String? id,
+    String? userId,
+    String? type,
+    String? petType,
+    String? petName,
+    String? breed,
+    String? color,
+    String? description,
+    DateTime? lostDate,
+    double? latitude,
+    double? longitude,
+    String? locationName,
+    List<String>? images,
+    String? contactMethod,
+    String? phoneNumber,
+    bool? isAnonymous,
+    bool? isActive,
+    bool? isSynced,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? viewCount,
+  }) =>
+      PostModel(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        type: type ?? this.type,
+        petType: petType ?? this.petType,
+        petName: petName ?? this.petName,
+        breed: breed ?? this.breed,
+        color: color ?? this.color,
+        description: description ?? this.description,
+        lostDate: lostDate ?? this.lostDate,
+        latitude: latitude ?? this.latitude,
+        longitude: longitude ?? this.longitude,
+        locationName: locationName ?? this.locationName,
+        images: images ?? this.images,
+        contactMethod: contactMethod ?? this.contactMethod,
+        phoneNumber: phoneNumber ?? this.phoneNumber,
+        isAnonymous: isAnonymous ?? this.isAnonymous,
+        isActive: isActive ?? this.isActive,
+        isSynced: isSynced ?? this.isSynced,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        viewCount: viewCount ?? this.viewCount,
+      );
+}

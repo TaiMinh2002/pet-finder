@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "151538289026",
+    "project_id": "pet-finder-df44c",
+    "storage_bucket": "pet-finder-df44c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151538289026:android:a4d96e2fa4a8b41e3a679b",
+        "android_client_info": {
+          "package_name": "com.example.pet_finder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151538289026-102jpq744ju6ribrdbb833pr6m4aju1s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9XaRe_3xjEpmi2w876WivTh3_NkiFar4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151538289026-102jpq744ju6ribrdbb833pr6m4aju1s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "151538289026-a5ogql9aqo49mjsqa5bvok58pibdcc0n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.petFinder"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
