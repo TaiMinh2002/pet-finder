@@ -466,8 +466,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                         opacity: _chipsOpacity.value,
                         child: SlideTransition(
                           position: _chipsSlide,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
+                          child: Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: 10,
+                            runSpacing: 10,
                             children: [
                               _PetChip(
                                 emoji: '🐶',
@@ -476,7 +478,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                                 text: AppColors.ctaDark,
                                 border: AppColors.ctaLight,
                               ),
-                              const SizedBox(width: 10),
                               _PetChip(
                                 emoji: '🐱',
                                 label: l.splashCats,
@@ -484,7 +485,6 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                                 text: AppColors.lost,
                                 border: AppColors.lost.withValues(alpha: 0.3),
                               ),
-                              const SizedBox(width: 10),
                               _PetChip(
                                 emoji: '🐦',
                                 label: l.splashBirds,
