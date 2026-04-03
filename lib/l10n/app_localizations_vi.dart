@@ -12,7 +12,19 @@ class AppLocalizationsVi extends AppLocalizations {
   String get appTitle => 'PetFinder';
 
   @override
+  String get splashWelcome => 'CHÀO MỪNG TỚI';
+
+  @override
   String get splashTagline => 'Đoàn tụ gia đình với những người bạn lông xù';
+
+  @override
+  String get splashDogs => 'Chó';
+
+  @override
+  String get splashCats => 'Mèo';
+
+  @override
+  String get splashBirds => 'Chim';
 
   @override
   String get onboardingTitle1 => 'Bảng Thông Báo Cộng Đồng';

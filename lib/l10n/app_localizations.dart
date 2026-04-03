@@ -104,11 +104,35 @@ abstract class AppLocalizations {
   /// **'PetFinder'**
   String get appTitle;
 
+  /// No description provided for @splashWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'WELCOME TO'**
+  String get splashWelcome;
+
   /// No description provided for @splashTagline.
   ///
   /// In en, this message translates to:
   /// **'Reuniting families with their beloved pets'**
   String get splashTagline;
+
+  /// No description provided for @splashDogs.
+  ///
+  /// In en, this message translates to:
+  /// **'Dogs'**
+  String get splashDogs;
+
+  /// No description provided for @splashCats.
+  ///
+  /// In en, this message translates to:
+  /// **'Cats'**
+  String get splashCats;
+
+  /// No description provided for @splashBirds.
+  ///
+  /// In en, this message translates to:
+  /// **'Birds'**
+  String get splashBirds;
 
   /// No description provided for @onboardingTitle1.
   ///

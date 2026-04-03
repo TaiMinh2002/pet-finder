@@ -1,8 +1,11 @@
 {
   "@@locale": "vi",
   "appTitle": "PetFinder",
+  "splashWelcome": "CHÀO MỪNG TỚI",
   "splashTagline": "Đoàn tụ gia đình với những người bạn lông xù",
-
+  "splashDogs": "Chó",
+  "splashCats": "Mèo",
+  "splashBirds": "Chim",
   "onboardingTitle1": "Bảng Thông Báo Cộng Đồng",
   "onboardingSubtitle1": "Chia sẻ tin đăng tìm và nhận thú cưng với cộng đồng xung quanh",
   "onboardingTitle2": "Bản Đồ & Vị Trí",
@@ -12,7 +15,6 @@
   "onboardingSkip": "Bỏ qua",
   "onboardingNext": "Tiếp theo",
   "onboardingGetStarted": "Bắt đầu",
-
   "loginTitle": "Chào Mừng Trở Lại! 👋",
   "loginSubtitle": "Đăng nhập để tiếp tục",
   "registerTitle": "Tạo Tài Khoản",
@@ -30,25 +32,21 @@
   "forgotPassword": "Quên mật khẩu?",
   "noAccount": "Chưa có tài khoản? ",
   "hasAccount": "Đã có tài khoản? ",
-
   "tabMap": "Bản đồ",
   "tabPosts": "Tin đăng",
   "tabCreate": "Đăng tin",
   "tabNotifications": "Thông báo",
   "tabProfile": "Tôi",
-
   "filterAll": "Tất cả",
   "filterLost": "Thất lạc",
   "filterFound": "Đã tìm thấy",
   "filterResolved": "Đoàn tụ",
-
   "postTypeLost": "Thất lạc",
   "postTypeFound": "Tìm thấy",
   "postTypeResolved": "Đoàn tụ",
   "petTypeDog": "Chó",
   "petTypeCat": "Mèo",
   "petTypeOther": "Khác",
-
   "createPostTitle": "Đăng Tin Mới",
   "stepPetInfo": "Thú cưng",
   "stepLocation": "Địa điểm",
@@ -77,24 +75,20 @@
   "publishPost": "Đăng Tin",
   "selectPetType": "Chọn loại thú cưng",
   "selectPostType": "Chọn loại tin đăng",
-
   "postDetailTitle": "Chi tiết",
   "contactOwner": "Liên hệ",
   "sharePost": "Chia sẻ",
   "viewOnMap": "Xem bản đồ",
   "postedAt": "Đăng lúc",
   "markAsResolved": "Đánh dấu đoàn tụ",
-
   "notificationsTitle": "Thông Báo",
   "notificationsEmpty": "Chưa có thông báo nào",
   "notificationsEmptyHint": "Bạn sẽ được thông báo khi có thú cưng lạc gần bạn",
-
   "profileTitle": "Trang cá nhân",
   "myPosts": "Tin đăng của tôi",
   "editProfile": "Chỉnh sửa hồ sơ",
   "signOut": "Đăng xuất",
   "signOutConfirm": "Bạn có chắc muốn đăng xuất không?",
-
   "settingsTitle": "Cài đặt",
   "settingsLanguage": "Ngôn ngữ",
   "settingsNotifications": "Thông báo",
@@ -103,12 +97,10 @@
   "settingsDarkMode": "Chế độ tối",
   "languageVi": "Tiếng Việt",
   "languageEn": "English",
-
   "mapTitle": "Thú Cưng Gần Đây",
   "mapMyLocation": "Vị trí của tôi",
   "mapSearchThisArea": "Tìm trong khu vực này",
   "mapNoPetsNearby": "Không có thú cưng nào gần đây",
-
   "commonLoading": "Đang tải...",
   "commonError": "Đã có lỗi xảy ra",
   "commonRetry": "Thử lại",
@@ -123,10 +115,8 @@
   "commonDone": "Xong",
   "commonNext": "Tiếp",
   "commonBack": "Quay lại",
-
   "emptyPosts": "Không tìm thấy tin đăng",
   "emptyPostsHint": "Hãy là người đầu tiên đăng tin tìm thú cưng!",
-
   "errorEmailRequired": "Vui lòng nhập email",
   "errorEmailInvalid": "Địa chỉ email không hợp lệ",
   "errorPasswordRequired": "Vui lòng nhập mật khẩu",
@@ -136,7 +126,6 @@
   "errorDescriptionRequired": "Vui lòng nhập mô tả",
   "errorLocationRequired": "Vui lòng chọn vị trí trên bản đồ",
   "errorPhoneRequired": "Vui lòng nhập số điện thoại",
-
   "successPostCreated": "Đăng tin thành công! 🎉",
   "successSignedOut": "Đã đăng xuất thành công",
   "successProfileUpdated": "Đã cập nhật hồ sơ"

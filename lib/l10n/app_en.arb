@@ -1,8 +1,11 @@
 {
   "@@locale": "en",
   "appTitle": "PetFinder",
+  "splashWelcome": "WELCOME TO",
   "splashTagline": "Reuniting families with their beloved pets",
-
+  "splashDogs": "Dogs",
+  "splashCats": "Cats",
+  "splashBirds": "Birds",
   "onboardingTitle1": "Community Board",
   "onboardingSubtitle1": "Share lost & found pet posts with your local community",
   "onboardingTitle2": "Map & Location",
@@ -12,7 +15,6 @@
   "onboardingSkip": "Skip",
   "onboardingNext": "Next",
   "onboardingGetStarted": "Get Started",
-
   "loginTitle": "Welcome Back! 👋",
   "loginSubtitle": "Sign in to continue",
   "registerTitle": "Create Account",
@@ -30,25 +32,21 @@
   "forgotPassword": "Forgot Password?",
   "noAccount": "Don't have an account? ",
   "hasAccount": "Already have an account? ",
-
   "tabMap": "Map",
   "tabPosts": "Posts",
   "tabCreate": "Create",
   "tabNotifications": "Alerts",
   "tabProfile": "Profile",
-
   "filterAll": "All",
   "filterLost": "Lost",
   "filterFound": "Found",
   "filterResolved": "Reunited",
-
   "postTypeLost": "Lost",
   "postTypeFound": "Found",
   "postTypeResolved": "Reunited",
   "petTypeDog": "Dog",
   "petTypeCat": "Cat",
   "petTypeOther": "Other",
-
   "createPostTitle": "New Post",
   "stepPetInfo": "Pet Info",
   "stepLocation": "Location",
@@ -77,24 +75,20 @@
   "publishPost": "Publish Post",
   "selectPetType": "Select pet type",
   "selectPostType": "Select post type",
-
   "postDetailTitle": "Details",
   "contactOwner": "Contact",
   "sharePost": "Share",
   "viewOnMap": "View on Map",
   "postedAt": "Posted",
   "markAsResolved": "Mark as Reunited",
-
   "notificationsTitle": "Notifications",
   "notificationsEmpty": "No notifications yet",
   "notificationsEmptyHint": "You'll be notified when pets are found near you",
-
   "profileTitle": "Profile",
   "myPosts": "My Posts",
   "editProfile": "Edit Profile",
   "signOut": "Sign Out",
   "signOutConfirm": "Are you sure you want to sign out?",
-
   "settingsTitle": "Settings",
   "settingsLanguage": "Language",
   "settingsNotifications": "Notifications",
@@ -103,12 +97,10 @@
   "settingsDarkMode": "Dark Mode",
   "languageVi": "Tiếng Việt",
   "languageEn": "English",
-
   "mapTitle": "Nearby Pets",
   "mapMyLocation": "My Location",
   "mapSearchThisArea": "Search this area",
   "mapNoPetsNearby": "No pets found nearby",
-
   "commonLoading": "Loading...",
   "commonError": "Something went wrong",
   "commonRetry": "Retry",
@@ -123,10 +115,8 @@
   "commonDone": "Done",
   "commonNext": "Next",
   "commonBack": "Back",
-
   "emptyPosts": "No posts found",
   "emptyPostsHint": "Be the first to post a lost or found pet!",
-
   "errorEmailRequired": "Email is required",
   "errorEmailInvalid": "Please enter a valid email",
   "errorPasswordRequired": "Password is required",
@@ -136,7 +126,6 @@
   "errorDescriptionRequired": "Description is required",
   "errorLocationRequired": "Please select a location on the map",
   "errorPhoneRequired": "Phone number is required",
-
   "successPostCreated": "Post published successfully! 🎉",
   "successSignedOut": "Signed out successfully",
   "successProfileUpdated": "Profile updated"

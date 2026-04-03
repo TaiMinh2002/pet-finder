@@ -12,7 +12,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'PetFinder';
 
   @override
+  String get splashWelcome => 'WELCOME TO';
+
+  @override
   String get splashTagline => 'Reuniting families with their beloved pets';
+
+  @override
+  String get splashDogs => 'Dogs';
+
+  @override
+  String get splashCats => 'Cats';
+
+  @override
+  String get splashBirds => 'Birds';
 
   @override
   String get onboardingTitle1 => 'Community Board';
