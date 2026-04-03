@@ -70,7 +70,7 @@ class _PostListPageState extends State<PostListPage>
                             Text(l.tabPosts,
                                 style: Theme.of(context).textTheme.headlineLarge),
                             Text(
-                              'Tìm thú cưng của bạn',
+                              l.postListSubtitle,
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: AppColors.textSecondary,
                                   ),

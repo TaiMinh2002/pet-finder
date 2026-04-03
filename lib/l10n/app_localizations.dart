@@ -871,6 +871,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile updated'**
   String get successProfileUpdated;
+
+  /// No description provided for @loginHeaderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in\nto your account'**
+  String get loginHeaderTitle;
+
+  /// No description provided for @loginHeaderEyebrow.
+  ///
+  /// In en, this message translates to:
+  /// **'WELCOME BACK'**
+  String get loginHeaderEyebrow;
+
+  /// No description provided for @loginHeaderSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Thousands of pets are waiting\nfor you to help them home'**
+  String get loginHeaderSubtitle;
+
+  /// No description provided for @loginOnlineMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'12.400 members online'**
+  String get loginOnlineMembers;
+
+  /// No description provided for @loginOrContinueWith.
+  ///
+  /// In en, this message translates to:
+  /// **'or continue with'**
+  String get loginOrContinueWith;
+
+  /// No description provided for @onboardingLabel1.
+  ///
+  /// In en, this message translates to:
+  /// **'1 / 3'**
+  String get onboardingLabel1;
+
+  /// No description provided for @onboardingTitle1Data.
+  ///
+  /// In en, this message translates to:
+  /// **'Lost pets will\nbe found'**
+  String get onboardingTitle1Data;
+
+  /// No description provided for @onboardingSubtitle1Data.
+  ///
+  /// In en, this message translates to:
+  /// **'Post in 30 seconds. Thousands of eyes are searching with you.'**
+  String get onboardingSubtitle1Data;
+
+  /// No description provided for @onboardingLabel2.
+  ///
+  /// In en, this message translates to:
+  /// **'2 / 3'**
+  String get onboardingLabel2;
+
+  /// No description provided for @onboardingTitle2Data.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart map\nnear you'**
+  String get onboardingTitle2Data;
+
+  /// No description provided for @onboardingSubtitle2Data.
+  ///
+  /// In en, this message translates to:
+  /// **'See nearby lost pet reports around you in real time.'**
+  String get onboardingSubtitle2Data;
+
+  /// No description provided for @onboardingLabel3.
+  ///
+  /// In en, this message translates to:
+  /// **'3 / 3'**
+  String get onboardingLabel3;
+
+  /// No description provided for @onboardingTitle3Data.
+  ///
+  /// In en, this message translates to:
+  /// **'Pet-loving\ncommunity helps'**
+  String get onboardingTitle3Data;
+
+  /// No description provided for @onboardingSubtitle3Data.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with tens of thousands of animal lovers ready to help.'**
+  String get onboardingSubtitle3Data;
+
+  /// No description provided for @postListSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Find your pet'**
+  String get postListSubtitle;
+
+  /// No description provided for @createPostStep.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {current} of {total}'**
+  String createPostStep(Object current, Object total);
+
+  /// No description provided for @photosUploaded.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} photo(s) uploaded'**
+  String photosUploaded(Object count);
+
+  /// No description provided for @unknownLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown location'**
+  String get unknownLocation;
+
+  /// No description provided for @settingsVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get settingsVersion;
+
+  /// No description provided for @settingsMadeWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Made with ❤️ for pets'**
+  String get settingsMadeWith;
+
+  /// No description provided for @cardTypeLost.
+  ///
+  /// In en, this message translates to:
+  /// **'LOST'**
+  String get cardTypeLost;
+
+  /// No description provided for @cardTypeFound.
+  ///
+  /// In en, this message translates to:
+  /// **'FOUND'**
+  String get cardTypeFound;
+
+  /// No description provided for @cardTypeResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'REUNITED'**
+  String get cardTypeResolved;
+
+  /// No description provided for @cardPetDog.
+  ///
+  /// In en, this message translates to:
+  /// **'Dog'**
+  String get cardPetDog;
+
+  /// No description provided for @cardPetCat.
+  ///
+  /// In en, this message translates to:
+  /// **'Cat'**
+  String get cardPetCat;
+
+  /// No description provided for @cardPetOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Pet'**
+  String get cardPetOther;
+
+  /// No description provided for @painterSpotted.
+  ///
+  /// In en, this message translates to:
+  /// **'Spotted near you!'**
+  String get painterSpotted;
+
+  /// No description provided for @painterDistance.
+  ///
+  /// In en, this message translates to:
+  /// **'350m away • 5 mins ago'**
+  String get painterDistance;
+
+  /// No description provided for @painterMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get painterMembers;
+
+  /// No description provided for @painterFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Found'**
+  String get painterFound;
 }
 
 class _AppLocalizationsDelegate

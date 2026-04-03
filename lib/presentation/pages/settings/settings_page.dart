@@ -73,8 +73,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         fontWeight: FontWeight.w600,
                       ),
                       items: [
-                        DropdownMenuItem(value: 'en', child: Text('English')),
-                        DropdownMenuItem(value: 'vi', child: Text('Tiếng Việt')),
+                        DropdownMenuItem(value: 'en', child: Text(l.languageEn)),
+                        DropdownMenuItem(value: 'vi', child: Text(l.languageVi)),
                       ],
                       onChanged: (v) => v != null ? _setLanguage(v) : null,
                     ),
@@ -148,7 +148,7 @@ class _SettingsPageState extends State<SettingsPage> {
               _SettingsTile(
                 icon: Icons.info_rounded,
                 iconColor: AppColors.found,
-                label: 'Version',
+                label: l.settingsVersion,
                 trailing: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
@@ -166,10 +166,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               const Divider(indent: 56, endIndent: 16),
-              const _SettingsTile(
-                icon: Icons.favorite_rounded,
-                iconColor: AppColors.lost,
-                label: 'Made with ❤️ for pets',
+              Builder(
+                builder: (context) => _SettingsTile(
+                  icon: Icons.favorite_rounded,
+                  iconColor: AppColors.lost,
+                  label: AppLocalizations.of(context).settingsMadeWith,
+                ),
               ),
             ],
           ),

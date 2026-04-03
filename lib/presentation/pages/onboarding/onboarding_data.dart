@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_finder/l10n/app_localizations.dart';
 
 class OnboardingData {
   final String label;
@@ -14,26 +15,31 @@ class OnboardingData {
   });
 }
 
-final List<OnboardingData> onboardingPages = [
+/// Colors used for each onboarding page (static, no i18n needed)
+const List<Color> onboardingColors = [
+  Color(0xFFFF6B6B),
+  Color(0xFF4EAEFF),
+  Color(0xFF56D49A),
+];
+
+/// Build localized onboarding pages at runtime
+List<OnboardingData> buildOnboardingPages(AppLocalizations l) => [
   OnboardingData(
-    label: '1 / 3',
-    title: 'Thú cưng lạc đường\nsẽ được tìm thấy',
-    subtitle:
-        'Đăng tin tìm kiếm chỉ trong 30 giây. Hàng nghìn mắt đang cùng bạn tìm.',
-    color: const Color(0xFFFF6B6B),
+    label: l.onboardingLabel1,
+    title: l.onboardingTitle1Data,
+    subtitle: l.onboardingSubtitle1Data,
+    color: onboardingColors[0],
   ),
   OnboardingData(
-    label: '2 / 3',
-    title: 'Bản đồ thông minh\ngần bạn nhất',
-    subtitle:
-        'Xem ngay vị trí các tin báo thất lạc xung quanh bạn theo thời gian thực.',
-    color: const Color(0xFF4EAEFF),
+    label: l.onboardingLabel2,
+    title: l.onboardingTitle2Data,
+    subtitle: l.onboardingSubtitle2Data,
+    color: onboardingColors[1],
   ),
   OnboardingData(
-    label: '3 / 3',
-    title: 'Cộng đồng yêu\nthú cưng cùng giúp',
-    subtitle:
-        'Kết nối với hàng chục ngàn người yêu động vật sẵn sàng hỗ trợ ngay.',
-    color: const Color(0xFF56D49A),
+    label: l.onboardingLabel3,
+    title: l.onboardingTitle3Data,
+    subtitle: l.onboardingSubtitle3Data,
+    color: onboardingColors[2],
   ),
 ];

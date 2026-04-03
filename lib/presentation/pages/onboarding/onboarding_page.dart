@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pet_finder/core/constants/app_constants.dart';
+import 'package:pet_finder/l10n/app_localizations.dart';
 import 'package:pet_finder/presentation/pages/onboarding/community_painter.dart';
 import 'package:pet_finder/presentation/pages/onboarding/lost_dog_painter.dart';
 import 'package:pet_finder/presentation/pages/onboarding/map_painter.dart';
@@ -21,6 +22,7 @@ class _OnboardingPageState extends State<OnboardingPage>
   // ── Page state ───────────────────────────────────────────────
   int _currentPage = 0;
   final _pageCtrl = PageController();
+  List<OnboardingData> _pages = [];
 
   // ── Float animation (continuous) ────────────────────────────
   late final AnimationController _floatCtrl;
@@ -53,6 +55,12 @@ class _OnboardingPageState extends State<OnboardingPage>
 
     _buildSlideAnim();
     _slideCtrl.forward();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _pages = buildOnboardingPages(AppLocalizations.of(context));
   }
 
   // ── Slide animation ──────────────────────────────────────────
@@ -98,11 +106,11 @@ class _OnboardingPageState extends State<OnboardingPage>
     setState(() => _currentPage = i);
     _buildSlideAnim();
     _slideCtrl.forward();
-    _spawnParticles(onboardingPages[i].color);
+    if (_pages.isNotEmpty) _spawnParticles(_pages[i].color);
   }
 
   void _nextPage() {
-    if (_currentPage < onboardingPages.length - 1) {
+    if (_currentPage < _pages.length - 1) {
       _pageCtrl.nextPage(
         duration: const Duration(milliseconds: 350),
         curve: Curves.easeInOut,
@@ -130,9 +138,11 @@ class _OnboardingPageState extends State<OnboardingPage>
   // ── Build ─────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
-    final page = onboardingPages[_currentPage];
+    if (_pages.isEmpty) return const SizedBox.shrink();
+    final l = AppLocalizations.of(context);
+    final page = _pages[_currentPage];
     final size = MediaQuery.of(context).size;
-    final isLast = _currentPage == onboardingPages.length - 1;
+    final isLast = _currentPage == _pages.length - 1;
 
     return Scaffold(
       backgroundColor: const Color(0xFFFFF8F3),
@@ -169,7 +179,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                     children: [
                       _buildDots(page.color),
                       const Spacer(),
-                      _buildSkipButton(),
+                      _buildSkipButton(l),
                     ],
                   ),
                 ),
@@ -180,15 +190,15 @@ class _OnboardingPageState extends State<OnboardingPage>
                     physics: const NeverScrollableScrollPhysics(),
                     controller: _pageCtrl,
                     onPageChanged: _onPageChanged,
-                    itemCount: onboardingPages.length,
-                    itemBuilder: (_, i) => _buildSlide(onboardingPages[i]),
+                    itemCount: _pages.length,
+                    itemBuilder: (_, i) => _buildSlide(_pages[i], l),
                   ),
                 ),
 
                 // ── CTA Button ────────────────────────────────────
                 Padding(
                   padding: const EdgeInsets.fromLTRB(24, 12, 24, 32),
-                  child: _buildCtaButton(page.color, isLast),
+                  child: _buildCtaButton(page.color, isLast, l),
                 ),
               ],
             ),
@@ -259,7 +269,7 @@ class _OnboardingPageState extends State<OnboardingPage>
 
   Widget _buildDots(Color activeColor) {
     return Row(
-      children: List.generate(onboardingPages.length, (i) {
+      children: List.generate(_pages.length, (i) {
         final isActive = i == _currentPage;
         return AnimatedContainer(
           duration: const Duration(milliseconds: 300),
@@ -275,7 +285,7 @@ class _OnboardingPageState extends State<OnboardingPage>
     );
   }
 
-  Widget _buildSkipButton() {
+  Widget _buildSkipButton(AppLocalizations l) {
     return GestureDetector(
       onTap: _finish,
       child: Container(
@@ -285,9 +295,9 @@ class _OnboardingPageState extends State<OnboardingPage>
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: Colors.black.withValues(alpha: 0.08)),
         ),
-        child: const Text(
-          'Bỏ qua',
-          style: TextStyle(
+        child: Text(
+          l.onboardingSkip,
+          style: const TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w700,
             color: Color(0xFF9A8878),
@@ -298,7 +308,7 @@ class _OnboardingPageState extends State<OnboardingPage>
     );
   }
 
-  Widget _buildSlide(OnboardingData data) {
+  Widget _buildSlide(OnboardingData data, AppLocalizations l) {
     return FadeTransition(
       opacity: _slideOpacity,
       child: SlideTransition(
@@ -316,7 +326,7 @@ class _OnboardingPageState extends State<OnboardingPage>
                     animation: _floatCtrl,
                     builder: (_, __) => CustomPaint(
                       size: const Size(260, 280),
-                      painter: _getPainter(data),
+                      painter: _getPainter(data, l),
                     ),
                   ),
                 ),
@@ -379,7 +389,7 @@ class _OnboardingPageState extends State<OnboardingPage>
     );
   }
 
-  Widget _buildCtaButton(Color color, bool isLast) {
+  Widget _buildCtaButton(Color color, bool isLast, AppLocalizations l) {
     return GestureDetector(
       onTap: _nextPage,
       child: AnimatedContainer(
@@ -403,7 +413,7 @@ class _OnboardingPageState extends State<OnboardingPage>
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 250),
               child: Text(
-                isLast ? 'Bắt đầu ngay' : 'Tiếp theo',
+                isLast ? l.onboardingGetStarted : l.onboardingNext,
                 key: ValueKey(isLast),
                 style: const TextStyle(
                   color: Colors.white,
@@ -427,15 +437,15 @@ class _OnboardingPageState extends State<OnboardingPage>
   }
 
   // ── Painter selector ─────────────────────────────────────────
-  CustomPainter _getPainter(OnboardingData data) {
+  CustomPainter _getPainter(OnboardingData data, AppLocalizations l) {
     final t = _floatCtrl.value;
-    switch (onboardingPages.indexOf(data)) {
+    switch (_pages.indexOf(data)) {
       case 0:
         return LostDogPainter(animValue: t);
       case 1:
-        return MapPainter(animValue: t);
+        return MapPainter(animValue: t, l: l);
       case 2:
-        return CommunityPainter(animValue: t);
+        return CommunityPainter(animValue: t, l: l);
       default:
         return LostDogPainter(animValue: t);
     }

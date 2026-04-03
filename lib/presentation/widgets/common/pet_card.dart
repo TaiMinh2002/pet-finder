@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:pet_finder/l10n/app_localizations.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/utils/date_formatter.dart';
 import '../../../domain/entities/post_entity.dart';
@@ -60,11 +61,11 @@ class _PetCardState extends State<PetCard>
     }
   }
 
-  String get _typeLabelText {
+  String _typeLabelText(AppLocalizations l) {
     switch (widget.post.type) {
-      case PostType.lost: return 'MẤT';
-      case PostType.found: return 'TÌM THẤY';
-      case PostType.resolved: return 'ĐÃ GIẢI QUYẾT';
+      case PostType.lost: return l.cardTypeLost;
+      case PostType.found: return l.cardTypeFound;
+      case PostType.resolved: return l.cardTypeResolved;
     }
   }
 
@@ -76,16 +77,17 @@ class _PetCardState extends State<PetCard>
     }
   }
 
-  String get _petLabel {
+  String _petLabel(AppLocalizations l) {
     switch (widget.post.petType) {
-      case PetType.dog: return 'Chó';
-      case PetType.cat: return 'Mèo';
-      case PetType.other: return 'Thú cưng';
+      case PetType.dog: return l.cardPetDog;
+      case PetType.cat: return l.cardPetCat;
+      case PetType.other: return l.cardPetOther;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final post = widget.post;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -172,7 +174,7 @@ class _PetCardState extends State<PetCard>
                                     ),
                                     const SizedBox(width: 4),
                                     Text(
-                                      _typeLabelText,
+                                      _typeLabelText(l),
                                       style: TextStyle(
                                         fontSize: 10,
                                         fontWeight: FontWeight.w800,
@@ -193,7 +195,7 @@ class _PetCardState extends State<PetCard>
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
-                                  _petLabel,
+                                  _petLabel(l),
                                   style: const TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w600,
@@ -205,7 +207,7 @@ class _PetCardState extends State<PetCard>
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            post.petName ?? _petLabel,
+                            post.petName ?? _petLabel(l),
                             style: Theme.of(context).textTheme.titleLarge,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

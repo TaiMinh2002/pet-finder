@@ -90,6 +90,7 @@ class _CreatePostPageState extends State<CreatePostPage>
   }
 
   Future<void> _submit() async {
+    final l = AppLocalizations.of(context);
     final auth = sl<AuthRemoteDataSource>();
     final uid = auth.currentUser?.uid ?? '';
     final post = PostEntity(
@@ -104,7 +105,7 @@ class _CreatePostPageState extends State<CreatePostPage>
       lostDate: _lostDate,
       latitude: _lat ?? AppConstants.defaultLat,
       longitude: _lng ?? AppConstants.defaultLng,
-      locationName: _locationName.isEmpty ? 'Unknown location' : _locationName,
+      locationName: _locationName.isEmpty ? l.unknownLocation : _locationName,
       images: _imageUrls,
       contactMethod: _contactMethod,
       phoneNumber:
@@ -178,7 +179,7 @@ class _CreatePostPageState extends State<CreatePostPage>
               child: Row(
                 children: [
                   Text(
-                    'Step ${_step + 1} of $_totalSteps',
+                    l.createPostStep(_step + 1, _totalSteps),
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                   const SizedBox(width: 8),
@@ -618,7 +619,7 @@ class _StepPhotos extends StatelessWidget {
               children: [
                 const Icon(Icons.cloud_done, color: AppColors.found, size: 16),
                 const SizedBox(width: 6),
-                Text('${imageUrls.length} photo(s) uploaded',
+                Text(l.photosUploaded(imageUrls.length),
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall

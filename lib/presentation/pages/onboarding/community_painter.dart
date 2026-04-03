@@ -1,10 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:pet_finder/l10n/app_localizations.dart';
 
 /// Slide 3: Community network with avatars orbiting a central paw
 class CommunityPainter extends CustomPainter {
   final double animValue;
-  const CommunityPainter({required this.animValue});
+  final AppLocalizations l;
+  const CommunityPainter({required this.animValue, required this.l});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -56,11 +58,10 @@ class CommunityPainter extends CustomPainter {
     }
 
     // ── Stat cards ───────────────────────────────────────────────
-    final cardY = size.height - 75.0;
-    _drawStatCard(canvas, Rect.fromLTWH(16, cardY, (size.width - 48) / 2, 58),
-        '12k+', 'Thành viên');
-    _drawStatCard(canvas, Rect.fromLTWH(size.width / 2 + 8, cardY, (size.width - 48) / 2, 58),
-        '94%', 'Tìm thấy');
+    _drawStatCard(canvas, Rect.fromLTWH(16, size.height - 75.0, (size.width - 48) / 2, 58),
+        '12k+', l.painterMembers);
+    _drawStatCard(canvas, Rect.fromLTWH(size.width / 2 + 8, size.height - 75.0, (size.width - 48) / 2, 58),
+        '94%', l.painterFound);
   }
 
   void _drawPaw(Canvas canvas, Offset center, double r, Color color) {

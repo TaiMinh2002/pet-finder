@@ -1,10 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:pet_finder/l10n/app_localizations.dart';
 
 /// Slide 2: Interactive map with pins and notification card
 class MapPainter extends CustomPainter {
   final double animValue;
-  const MapPainter({required this.animValue});
+  final AppLocalizations l;
+  const MapPainter({required this.animValue, required this.l});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -107,9 +109,9 @@ class MapPainter extends CustomPainter {
     _drawEmoji(canvas, '🐕', Offset(40, cardY + 36), 13);
 
     // Text content
-    _drawStyledText(canvas, 'Phát hiện gần bạn!',
+    _drawStyledText(canvas, l.painterSpotted,
         Offset(70, cardY + 19), 12, FontWeight.w700, const Color(0xFF1a1207));
-    _drawStyledText(canvas, 'Cách bạn 350m • 5 phút trước',
+    _drawStyledText(canvas, l.painterDistance,
         Offset(70, cardY + 37), 10, FontWeight.w400, const Color(0xFF888888));
 
     // Notification badge

@@ -398,4 +398,102 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get successProfileUpdated => 'Profile updated';
+
+  @override
+  String get loginHeaderTitle => 'Sign in\nto your account';
+
+  @override
+  String get loginHeaderEyebrow => 'WELCOME BACK';
+
+  @override
+  String get loginHeaderSubtitle =>
+      'Thousands of pets are waiting\nfor you to help them home';
+
+  @override
+  String get loginOnlineMembers => '12.400 members online';
+
+  @override
+  String get loginOrContinueWith => 'or continue with';
+
+  @override
+  String get onboardingLabel1 => '1 / 3';
+
+  @override
+  String get onboardingTitle1Data => 'Lost pets will\nbe found';
+
+  @override
+  String get onboardingSubtitle1Data =>
+      'Post in 30 seconds. Thousands of eyes are searching with you.';
+
+  @override
+  String get onboardingLabel2 => '2 / 3';
+
+  @override
+  String get onboardingTitle2Data => 'Smart map\nnear you';
+
+  @override
+  String get onboardingSubtitle2Data =>
+      'See nearby lost pet reports around you in real time.';
+
+  @override
+  String get onboardingLabel3 => '3 / 3';
+
+  @override
+  String get onboardingTitle3Data => 'Pet-loving\ncommunity helps';
+
+  @override
+  String get onboardingSubtitle3Data =>
+      'Connect with tens of thousands of animal lovers ready to help.';
+
+  @override
+  String get postListSubtitle => 'Find your pet';
+
+  @override
+  String createPostStep(Object current, Object total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String photosUploaded(Object count) {
+    return '$count photo(s) uploaded';
+  }
+
+  @override
+  String get unknownLocation => 'Unknown location';
+
+  @override
+  String get settingsVersion => 'Version';
+
+  @override
+  String get settingsMadeWith => 'Made with ❤️ for pets';
+
+  @override
+  String get cardTypeLost => 'LOST';
+
+  @override
+  String get cardTypeFound => 'FOUND';
+
+  @override
+  String get cardTypeResolved => 'REUNITED';
+
+  @override
+  String get cardPetDog => 'Dog';
+
+  @override
+  String get cardPetCat => 'Cat';
+
+  @override
+  String get cardPetOther => 'Pet';
+
+  @override
+  String get painterSpotted => 'Spotted near you!';
+
+  @override
+  String get painterDistance => '350m away • 5 mins ago';
+
+  @override
+  String get painterMembers => 'Members';
+
+  @override
+  String get painterFound => 'Found';
 }

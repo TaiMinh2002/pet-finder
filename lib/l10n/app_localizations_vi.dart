@@ -398,4 +398,102 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get successProfileUpdated => 'Đã cập nhật hồ sơ';
+
+  @override
+  String get loginHeaderTitle => 'Đăng nhập\nvào tài khoản';
+
+  @override
+  String get loginHeaderEyebrow => 'CHÀO MỪNG TRỞ LẠI';
+
+  @override
+  String get loginHeaderSubtitle =>
+      'Hàng nghìn thú cưng đang cần\nbạn giúp tìm về nhà';
+
+  @override
+  String get loginOnlineMembers => '12.400 thành viên online';
+
+  @override
+  String get loginOrContinueWith => 'hoặc tiếp tục với';
+
+  @override
+  String get onboardingLabel1 => '1 / 3';
+
+  @override
+  String get onboardingTitle1Data => 'Thú cưng lạc đường\nsẽ được tìm thấy';
+
+  @override
+  String get onboardingSubtitle1Data =>
+      'Đăng tin tìm kiếm chỉ trong 30 giây. Hàng nghìn mắt đang cùng bạn tìm.';
+
+  @override
+  String get onboardingLabel2 => '2 / 3';
+
+  @override
+  String get onboardingTitle2Data => 'Bản đồ thông minh\ngần bạn nhất';
+
+  @override
+  String get onboardingSubtitle2Data =>
+      'Xem ngay vị trí các tin báo thất lạc xung quanh bạn theo thời gian thực.';
+
+  @override
+  String get onboardingLabel3 => '3 / 3';
+
+  @override
+  String get onboardingTitle3Data => 'Cộng đồng yêu\nthú cưng cùng giúp';
+
+  @override
+  String get onboardingSubtitle3Data =>
+      'Kết nối với hàng chục ngàn người yêu động vật sẵn sàng hỗ trợ ngay.';
+
+  @override
+  String get postListSubtitle => 'Tìm thú cưng của bạn';
+
+  @override
+  String createPostStep(Object current, Object total) {
+    return 'Bước $current / $total';
+  }
+
+  @override
+  String photosUploaded(Object count) {
+    return 'Đã tải $count ảnh';
+  }
+
+  @override
+  String get unknownLocation => 'Vị trí chưa xác định';
+
+  @override
+  String get settingsVersion => 'Phiên bản';
+
+  @override
+  String get settingsMadeWith => 'Làm với ❤️ cho thú cưng';
+
+  @override
+  String get cardTypeLost => 'MẤT';
+
+  @override
+  String get cardTypeFound => 'TÌM THẤY';
+
+  @override
+  String get cardTypeResolved => 'ĐÃ ĐOÀN TỤ';
+
+  @override
+  String get cardPetDog => 'Chó';
+
+  @override
+  String get cardPetCat => 'Mèo';
+
+  @override
+  String get cardPetOther => 'Thú cưng';
+
+  @override
+  String get painterSpotted => 'Phát hiện gần bạn!';
+
+  @override
+  String get painterDistance => 'Cách bạn 350m • 5 phút trước';
+
+  @override
+  String get painterMembers => 'Thành viên';
+
+  @override
+  String get painterFound => 'Tìm thấy';
 }
