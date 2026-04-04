@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pet_finder/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'app/router.dart';
 import 'core/constants/app_constants.dart';
@@ -17,6 +18,20 @@ import 'presentation/blocs/post/post_bloc.dart';
 
 /// Global notifier so any widget can switch locale at runtime.
 final localeNotifier = ValueNotifier<Locale>(const Locale('vi'));
+
+/// Clears Firebase auth session on fresh install.
+/// On iOS, Keychain persists across app deletions, so Firebase keeps the user
+/// signed in even after the app is uninstalled and reinstalled.
+Future<void> _clearAuthOnFreshInstall() async {
+  final prefs = await SharedPreferences.getInstance();
+  const launchKey = 'app_has_launched_before';
+  final hasLaunchedBefore = prefs.getBool(launchKey) ?? false;
+
+  if (!hasLaunchedBefore) {
+    await FirebaseAuth.instance.signOut();
+    await prefs.setBool(launchKey, true);
+  }
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +48,8 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await HiveLocalDataSource.init();
   await configureDependencies();
+
+  await _clearAuthOnFreshInstall(); // Thêm TRƯỚC runApp
 
   final prefs = await SharedPreferences.getInstance();
   final langCode = prefs.getString(AppConstants.keyLanguage) ?? 'vi';

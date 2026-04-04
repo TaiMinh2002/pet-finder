@@ -28,19 +28,40 @@ class _MapPageState extends State<MapPage> {
   void initState() {
     super.initState();
     context.read<PostBloc>().add(const PostsLoadRequested());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _goToMyLocation();
+    });
   }
 
   Future<void> _goToMyLocation() async {
+    if (!mounted) return;
     setState(() => _locating = true);
     try {
+      final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) return;
+
       final permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
-        await Geolocator.requestPermission();
+        final requested = await Geolocator.requestPermission();
+        if (requested == LocationPermission.denied ||
+            requested == LocationPermission.deniedForever) {
+          return;
+        }
+      } else if (permission == LocationPermission.deniedForever) {
+        return;
       }
-      final pos = await Geolocator.getCurrentPosition();
+
+      final pos = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
+      );
+      if (!mounted) return;
+
       setState(() => _center = LatLng(pos.latitude, pos.longitude));
       _mapCtrl.move(_center, 14);
     } catch (_) {}
+    if (!mounted) return;
     setState(() => _locating = false);
   }
 
@@ -66,75 +87,81 @@ class _MapPageState extends State<MapPage> {
     }
   }
 
+  List<Marker> _buildMarkers(List<PostEntity> posts) {
+    return posts.map((post) {
+      return Marker(
+        point: LatLng(post.latitude, post.longitude),
+        width: 48,
+        height: 48,
+        child: GestureDetector(
+          onTap: () => context.push('/posts/${post.id}'),
+          child: Container(
+            decoration: BoxDecoration(
+              color: _markerColor(post.type),
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.white, width: 2),
+              boxShadow: [
+                BoxShadow(
+                  color: _markerColor(post.type).withValues(alpha: 0.4),
+                  blurRadius: 8,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Icon(
+              _markerIcon(post.petType),
+              color: Colors.white,
+              size: 22,
+            ),
+          ),
+        ),
+      );
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     return Scaffold(
       body: Stack(
         children: [
-          BlocBuilder<PostBloc, PostState>(
-            builder: (context, state) {
-              final posts = state is PostsLoaded ? state.posts : <PostEntity>[];
-              return FlutterMap(
-                mapController: _mapCtrl,
-                options: MapOptions(
-                  initialCenter: _center,
-                  initialZoom: AppConstants.defaultZoom,
-                  cameraConstraint: CameraConstraint.contain(
-                    bounds: LatLngBounds(
-                      const LatLng(20.56, 105.28), // Southwest
-                      const LatLng(21.39, 106.02), // Northeast
-                    ),
-                  ),
-                  interactionOptions: const InteractionOptions(
-                    flags: InteractiveFlag.drag |
-                        InteractiveFlag.pinchZoom |
-                        InteractiveFlag.doubleTapZoom |
-                        InteractiveFlag.scrollWheelZoom,
-                  ),
-                  onTap: (_, __) {},
+          // FlutterMap nằm ngoài BlocBuilder để tránh rebuild toàn bộ map
+          // khi state thay đổi, chỉ MarkerLayer được rebuild qua BlocBuilder
+          FlutterMap(
+            mapController: _mapCtrl,
+            options: MapOptions(
+              initialCenter: _center,
+              initialZoom: AppConstants.defaultZoom,
+              cameraConstraint: CameraConstraint.contain(
+                bounds: LatLngBounds(
+                  const LatLng(20.56, 105.28), // Southwest
+                  const LatLng(21.39, 106.02), // Northeast
                 ),
-                children: [
-                  TileLayer(
-                    urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'com.petfinder.app',
-                  ),
-                  MarkerLayer(
-                    markers: posts.map((post) {
-                      return Marker(
-                        point: LatLng(post.latitude, post.longitude),
-                        width: 48,
-                        height: 48,
-                        child: GestureDetector(
-                          onTap: () => context.push('/posts/${post.id}'),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: _markerColor(post.type),
-                              shape: BoxShape.circle,
-                              border: Border.all(color: Colors.white, width: 2),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: _markerColor(post.type)
-                                      .withValues(alpha: 0.4),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Icon(
-                              _markerIcon(post.petType),
-                              color: Colors.white,
-                              size: 22,
-                            ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              );
-            },
+              ),
+              interactionOptions: const InteractionOptions(
+                flags: InteractiveFlag.drag |
+                    InteractiveFlag.pinchZoom |
+                    InteractiveFlag.doubleTapZoom |
+                    InteractiveFlag.scrollWheelZoom,
+              ),
+              onTap: (_, __) {},
+            ),
+            children: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                userAgentPackageName: 'com.petfinder.app',
+              ),
+              // Chỉ rebuild MarkerLayer khi state thay đổi
+              BlocBuilder<PostBloc, PostState>(
+                builder: (context, state) {
+                  final posts =
+                      state is PostsLoaded ? state.posts : <PostEntity>[];
+                  return MarkerLayer(
+                    markers: _buildMarkers(posts),
+                  );
+                },
+              ),
+            ],
           ),
           Positioned(
             top: 0,

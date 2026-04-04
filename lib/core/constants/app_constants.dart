@@ -29,9 +29,9 @@ class AppConstants {
   static const String keyOnboardingDone = 'onboarding_done';
   static const String keyLanguage = 'language';
 
-  // Map defaults — Ho Chi Minh City centre
-  static const double defaultLat = 10.8231;
-  static const double defaultLng = 106.6297;
+  // Map defaults — Hanoi centre
+  static const double defaultLat = 21.0285;
+  static const double defaultLng = 105.8542;
   static const double defaultZoom = 13.0;
 
   // Business rules

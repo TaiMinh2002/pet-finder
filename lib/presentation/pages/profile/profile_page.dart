@@ -116,31 +116,7 @@ class ProfilePage extends StatelessWidget {
                       label: l.signOut,
                       iconColor: AppColors.lost,
                       textColor: AppColors.lost,
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (_) => AlertDialog(
-                            title: Text(l.signOut),
-                            content: Text(l.signOutConfirm),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: Text(l.commonCancel),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  context
-                                      .read<AuthBloc>()
-                                      .add(const AuthSignOutRequested());
-                                },
-                                child: Text(l.signOut,
-                                    style: TextStyle(color: AppColors.lost)),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                      onTap: () => _showSignOutDialog(context, l),
                     ),
                     const SizedBox(height: 80),
                   ],
@@ -149,6 +125,39 @@ class ProfilePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _showSignOutDialog(BuildContext context, dynamic l) {
+    // Lưu AuthBloc reference trước khi mở dialog
+    // để tránh context bị invalid sau khi dialog đóng và navigation xảy ra
+    final authBloc = context.read<AuthBloc>();
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l.signOut),
+        content: Text(l.signOutConfirm),
+        actions: [
+          TextButton(
+            // Dùng dialogContext riêng để pop đúng dialog,
+            // không ảnh hưởng đến GoRouter navigation stack
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(l.commonCancel),
+          ),
+          TextButton(
+            onPressed: () {
+              // Đóng dialog trước bằng dialogContext
+              Navigator.of(dialogContext).pop();
+              // Dispatch sign out sau khi dialog đã đóng hoàn toàn
+              // dùng authBloc đã lưu sẵn, không dùng context có thể bị unmount
+              authBloc.add(const AuthSignOutRequested());
+            },
+            child:
+                Text(l.signOut, style: const TextStyle(color: AppColors.lost)),
+          ),
+        ],
       ),
     );
   }
