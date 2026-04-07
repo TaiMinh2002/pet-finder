@@ -4,11 +4,21 @@ class AppConstants {
   static const String appName = 'PetFinder';
   static const String appVersion = '1.0.0';
 
-  // ⚠️ Replace with your Cloudinary credentials
-  static const String cloudinaryCloudName = 'YOUR_CLOUD_NAME';
-  static const String cloudinaryUploadPreset = 'YOUR_UPLOAD_PRESET';
+  static const String cloudinaryCloudName = 'db3sh67rd';
+  static const String cloudinaryUploadPreset = 'pet-finder';
   static String get cloudinaryUploadUrl =>
       'https://api.cloudinary.com/v1_1/$cloudinaryCloudName/image/upload';
+  static bool get isCloudinaryConfigured =>
+      cloudinaryCloudName.isNotEmpty && cloudinaryUploadPreset.isNotEmpty;
+
+  static void validateCloudinaryConfig() {
+    if (!isCloudinaryConfigured) {
+      throw StateError(
+        'Cloudinary is not configured. Update AppConstants.cloudinaryCloudName '
+        'and AppConstants.cloudinaryUploadPreset before launching the app.',
+      );
+    }
+  }
 
   // Firestore collections
   static const String colUsers = 'users';

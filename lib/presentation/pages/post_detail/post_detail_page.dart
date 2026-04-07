@@ -4,8 +4,8 @@ import 'package:pet_finder/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/utils/date_formatter.dart';
-import '../../../data/datasources/remote/post_remote_datasource.dart';
 import '../../../domain/entities/post_entity.dart';
+import '../../../domain/repositories/i_post_repository.dart';
 import '../../../injection_container.dart';
 import '../../widgets/common/post_type_badge.dart';
 
@@ -20,6 +20,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
   PostEntity? _post;
   bool _loading = true;
   int _currentImage = 0;
+  String? _errorMessage;
 
   @override
   void initState() {
@@ -28,18 +29,21 @@ class _PostDetailPageState extends State<PostDetailPage> {
   }
 
   Future<void> _loadPost() async {
-    try {
-      final ds = sl<PostRemoteDataSource>();
-      final model = await ds.getPostById(widget.postId);
-      if (mounted) {
-        setState(() {
-          _post = model.toEntity();
-          _loading = false;
-        });
-      }
-    } catch (_) {
-      if (mounted) setState(() => _loading = false);
-    }
+    final repo = sl<IPostRepository>();
+    final result = await repo.getPostById(widget.postId);
+
+    if (!mounted) return;
+
+    result.fold(
+      (failure) => setState(() {
+        _errorMessage = failure.message;
+        _loading = false;
+      }),
+      (post) => setState(() {
+        _post = post;
+        _loading = false;
+      }),
+    );
   }
 
   Future<void> _callPhone(String phone) async {
@@ -54,7 +58,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : _post == null
-              ? Center(child: Text(l.commonError))
+              ? Center(child: Text(_errorMessage ?? l.commonError))
               : _buildContent(context, _post!, l),
     );
   }
@@ -210,12 +214,18 @@ class _DetailRow extends StatelessWidget {
       children: [
         Icon(icon, size: 18, color: AppColors.textSecondary),
         const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(label, style: Theme.of(context).textTheme.labelSmall),
-            Text(value, style: Theme.of(context).textTheme.titleSmall),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(label, style: Theme.of(context).textTheme.labelSmall),
+              Text(
+                value,
+                style: Theme.of(context).textTheme.titleSmall,
+                softWrap: true,
+              ),
+            ],
+          ),
         ),
       ],
     );

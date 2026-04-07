@@ -47,6 +47,7 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await HiveLocalDataSource.init();
+  AppConstants.validateCloudinaryConfig();
   await configureDependencies();
 
   await _clearAuthOnFreshInstall(); // Thêm TRƯỚC runApp

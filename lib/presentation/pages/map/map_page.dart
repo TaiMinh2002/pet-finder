@@ -132,12 +132,6 @@ class _MapPageState extends State<MapPage> {
             options: MapOptions(
               initialCenter: _center,
               initialZoom: AppConstants.defaultZoom,
-              cameraConstraint: CameraConstraint.contain(
-                bounds: LatLngBounds(
-                  const LatLng(20.56, 105.28), // Southwest
-                  const LatLng(21.39, 106.02), // Northeast
-                ),
-              ),
               interactionOptions: const InteractionOptions(
                 flags: InteractiveFlag.drag |
                     InteractiveFlag.pinchZoom |
