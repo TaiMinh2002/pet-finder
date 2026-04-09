@@ -10,6 +10,9 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   final CreatePostUseCase createPost;
   final IPostRepository postRepo;
 
+  // Cache all unfiltered posts for tab counts
+  List<dynamic> _cachedAllPosts = [];
+
   PostBloc({
     required this.getPosts,
     required this.createPost,
@@ -33,11 +36,18 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     );
     result.fold(
       (failure) => emit(PostError(failure.message)),
-      (posts) => emit(PostsLoaded(
-        posts: posts,
-        activeFilter: event.filterType,
-        activePetFilter: event.filterPetType,
-      )),
+      (posts) {
+        // Only update the unfiltered cache when loading without a filter
+        if (event.filterType == null && event.filterPetType == null) {
+          _cachedAllPosts = posts;
+        }
+        emit(PostsLoaded(
+          posts: posts,
+          allPosts: List.from(_cachedAllPosts),
+          activeFilter: event.filterType,
+          activePetFilter: event.filterPetType,
+        ));
+      },
     );
   }
 

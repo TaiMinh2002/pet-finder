@@ -17,15 +17,19 @@ class PostLoading extends PostState {
 
 class PostsLoaded extends PostState {
   final List<PostEntity> posts;
+  final List<PostEntity> allPosts; // unfiltered — used for tab counts
   final PostType? activeFilter;
   final PetType? activePetFilter;
+
   const PostsLoaded({
     required this.posts,
+    required this.allPosts,
     this.activeFilter,
     this.activePetFilter,
   });
+
   @override
-  List<Object?> get props => [posts, activeFilter, activePetFilter];
+  List<Object?> get props => [posts, allPosts, activeFilter, activePetFilter];
 }
 
 class PostCreating extends PostState {
