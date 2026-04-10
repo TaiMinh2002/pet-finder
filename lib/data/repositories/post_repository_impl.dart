@@ -24,11 +24,9 @@ class PostRepositoryImpl implements IPostRepository {
   );
 
   @override
-  Stream<List<PostEntity>> getPostsStream({PostType? filterType}) =>
-      _remote.getPostsStream().map((posts) => posts
-          .where((p) => filterType == null || p.type == filterType.name)
-          .map((p) => p.toEntity())
-          .toList());
+  Stream<List<PostEntity>> getPostsStream({PostType? filterType}) => _remote
+      .getPostsStream(filterType: filterType?.name)
+      .map((posts) => posts.map((p) => p.toEntity()).toList());
 
   @override
   Future<Either<Failure, List<PostEntity>>> getPosts({
@@ -41,7 +39,8 @@ class PostRepositoryImpl implements IPostRepository {
         await _local.savePosts(models);
         final entities = models
             .where((p) => filterType == null || p.type == filterType.name)
-            .where((p) => filterPetType == null || p.petType == filterPetType.name)
+            .where(
+                (p) => filterPetType == null || p.petType == filterPetType.name)
             .map((p) => p.toEntity())
             .toList();
         return Right(entities);
@@ -50,9 +49,11 @@ class PostRepositoryImpl implements IPostRepository {
       }
     } else {
       // Offline — serve from Hive cache
-      final cached = _local.getAllPosts()
+      final cached = _local
+          .getAllPosts()
           .where((p) => filterType == null || p.type == filterType.name)
-          .where((p) => filterPetType == null || p.petType == filterPetType.name)
+          .where(
+              (p) => filterPetType == null || p.petType == filterPetType.name)
           .map((p) => p.toEntity())
           .toList();
       return Right(cached);
@@ -114,7 +115,8 @@ class PostRepositoryImpl implements IPostRepository {
   }
 
   @override
-  Future<Either<Failure, List<String>>> uploadImages(List<String> localPaths) async {
+  Future<Either<Failure, List<String>>> uploadImages(
+      List<String> localPaths) async {
     try {
       final urls = await _cloudinary.uploadImages(localPaths);
       return Right(urls);
@@ -140,7 +142,8 @@ class PostRepositoryImpl implements IPostRepository {
   }
 
   @override
-  Future<Either<Failure, List<PostEntity>>> getPostsByUser(String userId) async {
+  Future<Either<Failure, List<PostEntity>>> getPostsByUser(
+      String userId) async {
     try {
       final models = await _remote.getPostsByUser(userId);
       return Right(models.map((m) => m.toEntity()).toList());

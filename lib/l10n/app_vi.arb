@@ -129,6 +129,8 @@
   "successPostCreated": "Đăng tin thành công! 🎉",
   "successSignedOut": "Đã đăng xuất thành công",
   "successProfileUpdated": "Đã cập nhật hồ sơ",
+  "errorWaitForUpload": "Vui lòng chờ ảnh được tải lên xong",
+  "errorSessionExpired": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
   "loginHeaderTitle": "Đăng nhập\nvào tài khoản",
   "loginHeaderEyebrow": "CHÀO MỪNG TRỞ LẠI",
   "loginHeaderSubtitle": "Hàng nghìn thú cưng đang cần\nbạn giúp tìm về nhà",

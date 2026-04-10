@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
 
 enum PostType { lost, found, resolved }
+
 enum PetType { dog, cat, other }
+
 enum ContactMethod { phone, zalo, both }
 
 class PostEntity extends Equatable {
@@ -58,5 +60,16 @@ class PostEntity extends Equatable {
   String? get thumbnailUrl => images.isNotEmpty ? images.first : null;
 
   @override
-  List<Object?> get props => [id, userId, type, petType, createdAt];
+  List<Object?> get props => [
+        id,
+        userId,
+        type,
+        petType,
+        createdAt,
+        isActive,
+        viewCount,
+        description,
+        images,
+        updatedAt,
+      ];
 }

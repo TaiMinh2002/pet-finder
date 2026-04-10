@@ -400,6 +400,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get successProfileUpdated => 'Đã cập nhật hồ sơ';
 
   @override
+  String get errorWaitForUpload => 'Vui lòng chờ ảnh được tải lên xong';
+
+  @override
+  String get errorSessionExpired =>
+      'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.';
+
+  @override
   String get loginHeaderTitle => 'Đăng nhập\nvào tài khoản';
 
   @override

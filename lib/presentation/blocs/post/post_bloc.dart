@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../domain/entities/post_entity.dart';
 import '../../../domain/repositories/i_post_repository.dart';
 import '../../../domain/usecases/post/create_post_usecase.dart';
 import '../../../domain/usecases/post/get_posts_usecase.dart';
@@ -10,8 +11,8 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   final CreatePostUseCase createPost;
   final IPostRepository postRepo;
 
-  // Cache all unfiltered posts for tab counts
-  List<dynamic> _cachedAllPosts = [];
+  // Typed cache of all unfiltered posts for client-side tab filtering.
+  List<PostEntity> _cachedAllPosts = [];
 
   PostBloc({
     required this.getPosts,
@@ -37,9 +38,10 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     result.fold(
       (failure) => emit(PostError(failure.message)),
       (posts) {
-        // Only update the unfiltered cache when loading without a filter
+        // Populate the unfiltered cache whenever we load without a filter,
+        // so subsequent _onFilterChanged calls don't need a network call.
         if (event.filterType == null && event.filterPetType == null) {
-          _cachedAllPosts = posts;
+          _cachedAllPosts = List<PostEntity>.from(posts);
         }
         emit(PostsLoaded(
           posts: posts,
@@ -55,9 +57,17 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     PostFilterChanged event,
     Emitter<PostState> emit,
   ) async {
-    add(PostsLoadRequested(
-      filterType: event.filterType,
-      filterPetType: event.filterPetType,
+    // Apply filter against the in-memory cache — no Firestore round-trip.
+    final filtered = _cachedAllPosts
+        .where((p) => event.filterType == null || p.type == event.filterType)
+        .where((p) =>
+            event.filterPetType == null || p.petType == event.filterPetType)
+        .toList();
+    emit(PostsLoaded(
+      posts: filtered,
+      allPosts: List.from(_cachedAllPosts),
+      activeFilter: event.filterType,
+      activePetFilter: event.filterPetType,
     ));
   }
 

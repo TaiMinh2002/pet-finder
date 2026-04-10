@@ -54,46 +54,55 @@ class StepContact extends StatelessWidget {
               children: ContactMethod.values.map((m) {
                 final selected = contactMethod == m;
                 return Expanded(
-                  child: GestureDetector(
-                    onTap: () => onContactMethodChanged(m),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      margin: const EdgeInsets.only(right: 8),
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      decoration: BoxDecoration(
-                        color: selected
-                            ? AppColors.primaryContainer
-                            : AppColors.surfaceVariant,
-                        border: Border.all(
-                            color:
-                                selected ? AppColors.primary : AppColors.border,
-                            width: selected ? 2 : 1),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: Semantics(
+                      label: _contactLabel(m),
+                      button: true,
+                      selected: selected,
+                      child: InkWell(
                         borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                        children: [
-                          Icon(
-                            m == ContactMethod.phone
-                                ? Icons.phone_outlined
-                                : m == ContactMethod.zalo
-                                    ? Icons.chat_outlined
-                                    : Icons.contact_phone_outlined,
+                        onTap: () => onContactMethodChanged(m),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
                             color: selected
-                                ? AppColors.primary
-                                : AppColors.textHint,
+                                ? AppColors.primaryContainer
+                                : AppColors.surfaceVariant,
+                            border: Border.all(
+                                color: selected
+                                    ? AppColors.primary
+                                    : AppColors.border,
+                                width: selected ? 2 : 1),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            _contactLabel(m),
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: selected
-                                  ? AppColors.primary
-                                  : AppColors.textHint,
-                            ),
+                          child: Column(
+                            children: [
+                              Icon(
+                                m == ContactMethod.phone
+                                    ? Icons.phone_outlined
+                                    : m == ContactMethod.zalo
+                                        ? Icons.chat_outlined
+                                        : Icons.contact_phone_outlined,
+                                color: selected
+                                    ? AppColors.primary
+                                    : AppColors.textHint,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                _contactLabel(m),
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600,
+                                  color: selected
+                                      ? AppColors.primary
+                                      : AppColors.textHint,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ),

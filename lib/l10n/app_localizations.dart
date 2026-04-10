@@ -872,6 +872,18 @@ abstract class AppLocalizations {
   /// **'Profile updated'**
   String get successProfileUpdated;
 
+  /// No description provided for @errorWaitForUpload.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait for photos to finish uploading'**
+  String get errorWaitForUpload;
+
+  /// No description provided for @errorSessionExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Your session has expired. Please sign in again.'**
+  String get errorSessionExpired;
+
   /// No description provided for @loginHeaderTitle.
   ///
   /// In en, this message translates to:

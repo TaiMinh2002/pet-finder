@@ -129,6 +129,8 @@
   "successPostCreated": "Post published successfully! 🎉",
   "successSignedOut": "Signed out successfully",
   "successProfileUpdated": "Profile updated",
+  "errorWaitForUpload": "Please wait for photos to finish uploading",
+  "errorSessionExpired": "Your session has expired. Please sign in again.",
   "loginHeaderTitle": "Sign in\nto your account",
   "loginHeaderEyebrow": "WELCOME BACK",
   "loginHeaderSubtitle": "Thousands of pets are waiting\nfor you to help them home",

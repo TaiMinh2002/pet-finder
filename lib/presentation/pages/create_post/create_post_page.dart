@@ -93,6 +93,16 @@ class _CreatePostPageState extends State<CreatePostPage>
 
   Future<void> _submit() async {
     final l = AppLocalizations.of(context);
+
+    // Guard: images still uploading
+    final currentState = context.read<PostBloc>().state;
+    if (currentState is PostImagesUploading) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l.errorWaitForUpload)),
+      );
+      return;
+    }
+
     if (_lat == null || _lng == null || _locationName.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(l.errorLocationRequired)),
@@ -102,7 +112,16 @@ class _CreatePostPageState extends State<CreatePostPage>
     }
 
     final auth = sl<AuthRemoteDataSource>();
-    final uid = auth.currentUser?.uid ?? '';
+    final uid = auth.currentUser?.uid;
+    if (uid == null) {
+      // Session expired — force re-login
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l.errorSessionExpired)),
+      );
+      if (mounted) context.go('/auth/login');
+      return;
+    }
+
     final post = PostEntity(
       id: const Uuid().v4(),
       userId: uid,

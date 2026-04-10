@@ -166,8 +166,14 @@ class PostModel extends HiveObject {
   PostEntity toEntity() => PostEntity(
         id: id,
         userId: userId,
-        type: PostType.values.firstWhere((e) => e.name == type),
-        petType: PetType.values.firstWhere((e) => e.name == petType),
+        type: PostType.values.firstWhere(
+          (e) => e.name == type,
+          orElse: () => PostType.lost,
+        ),
+        petType: PetType.values.firstWhere(
+          (e) => e.name == petType,
+          orElse: () => PetType.other,
+        ),
         petName: petName,
         breed: breed,
         color: color,
@@ -177,7 +183,10 @@ class PostModel extends HiveObject {
         longitude: longitude,
         locationName: locationName,
         images: images,
-        contactMethod: ContactMethod.values.firstWhere((e) => e.name == contactMethod),
+        contactMethod: ContactMethod.values.firstWhere(
+          (e) => e.name == contactMethod,
+          orElse: () => ContactMethod.phone,
+        ),
         phoneNumber: phoneNumber,
         isAnonymous: isAnonymous,
         isActive: isActive,

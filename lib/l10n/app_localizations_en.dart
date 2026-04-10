@@ -400,6 +400,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get successProfileUpdated => 'Profile updated';
 
   @override
+  String get errorWaitForUpload => 'Please wait for photos to finish uploading';
+
+  @override
+  String get errorSessionExpired =>
+      'Your session has expired. Please sign in again.';
+
+  @override
   String get loginHeaderTitle => 'Sign in\nto your account';
 
   @override

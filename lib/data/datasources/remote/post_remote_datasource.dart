@@ -10,13 +10,19 @@ class PostRemoteDataSource {
   CollectionReference<Map<String, dynamic>> get _col =>
       _db.collection(AppConstants.colPosts);
 
-  Stream<List<PostModel>> getPostsStream() => _col
-      .where('isActive', isEqualTo: true)
-      .orderBy('createdAt', descending: true)
-      .snapshots()
-      .map((snap) => snap.docs
-          .map((d) => PostModel.fromMap({...d.data(), 'id': d.id}))
-          .toList());
+  Stream<List<PostModel>> getPostsStream(
+      {String? filterType, int limit = 100}) {
+    var query = _col
+        .where('isActive', isEqualTo: true)
+        .orderBy('createdAt', descending: true)
+        .limit(limit);
+    if (filterType != null) {
+      query = query.where('type', isEqualTo: filterType);
+    }
+    return query.snapshots().map((snap) => snap.docs
+        .map((d) => PostModel.fromMap({...d.data(), 'id': d.id}))
+        .toList());
+  }
 
   Future<List<PostModel>> getPosts() async {
     try {

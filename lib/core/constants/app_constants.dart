@@ -1,11 +1,15 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class AppConstants {
   AppConstants._();
 
   static const String appName = 'PetFinder';
   static const String appVersion = '1.0.0';
 
-  static const String cloudinaryCloudName = 'db3sh67rd';
-  static const String cloudinaryUploadPreset = 'pet-finder';
+  static String get cloudinaryCloudName =>
+      dotenv.env['CLOUDINARY_CLOUD_NAME'] ?? '';
+  static String get cloudinaryUploadPreset =>
+      dotenv.env['CLOUDINARY_UPLOAD_PRESET'] ?? '';
   static String get cloudinaryUploadUrl =>
       'https://api.cloudinary.com/v1_1/$cloudinaryCloudName/image/upload';
   static bool get isCloudinaryConfigured =>
@@ -14,8 +18,8 @@ class AppConstants {
   static void validateCloudinaryConfig() {
     if (!isCloudinaryConfigured) {
       throw StateError(
-        'Cloudinary is not configured. Update AppConstants.cloudinaryCloudName '
-        'and AppConstants.cloudinaryUploadPreset before launching the app.',
+        'Cloudinary is not configured. Add CLOUDINARY_CLOUD_NAME and '
+        'CLOUDINARY_UPLOAD_PRESET to your .env file.',
       );
     }
   }

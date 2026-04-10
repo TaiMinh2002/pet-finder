@@ -56,6 +56,7 @@ dependencies:
   permission_handler: ^12.0.1
   uuid: ^4.4.2
   intl: ^0.20.0
+  flutter_dotenv: ^5.2.1
 
   # UI enhancements
   shimmer: ^3.0.0

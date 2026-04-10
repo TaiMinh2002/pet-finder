@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pet_finder/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../injection_container.dart';
 import '../../blocs/auth/auth_bloc.dart';
 import '../../blocs/auth/auth_event.dart';
 import '../../blocs/auth/auth_state.dart';
@@ -28,12 +27,7 @@ class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<AuthBloc>(),
-      child: const _RegisterView(),
-    );
-  }
+  Widget build(BuildContext context) => const _RegisterView();
 }
 
 // ─── Main view ────────────────────────────────────────────────────────────────
@@ -180,7 +174,10 @@ class _RegisterViewState extends State<_RegisterView>
                               if (v == null || v.isEmpty) {
                                 return l.errorEmailRequired;
                               }
-                              if (!v.contains('@')) return l.errorEmailInvalid;
+                              if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
+                                  .hasMatch(v)) {
+                                return l.errorEmailInvalid;
+                              }
                               return null;
                             },
                           ),
