@@ -34,10 +34,10 @@ Future<void> _clearAuthOnFreshInstall() async {
   }
 }
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await dotenv.load();
+  await dotenv.load(fileName: ".env"); // ensure fileName matches exactly
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
